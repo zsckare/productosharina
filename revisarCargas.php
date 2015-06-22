@@ -66,7 +66,8 @@ $id_dcto = trim($row[0]);
           <div class="row">
             <div class="input-field col s12 m6 offset-m3">
               <?php 
-              echo '<input type="hidden" value='.$id_ruta.' name="idruta">';
+              echo '<input type="hidden" value='.$id_ruta.' name="idruta">
+              <input type="hidden" value='.$id_dcto.' name="id_dcto">';
                ?>
             <select name="producto" class="browser-default">
               

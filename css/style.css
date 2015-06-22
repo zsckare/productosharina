@@ -37,10 +37,33 @@ ul.azul li:hover{
   padding: .3em;
  border: 1px solid #03a9f4 !important;
  border-radius: 3px;
+ transition:all .5s ease;
 }
 .botnnva:hover{
   box-shadow: 0px 0px 6px #03a9f4;
-  transition:all .8s;
+  
+}
+.botnret{
+  padding: .3em;
+ border: 1px solid #ff6d00 !important;
+ border-radius: 3px;
+ color: #ff6d00 !important;
+ transition:all .5s ease;
+}
+.botnret:hover{
+  box-shadow: 0px 0px 6px #ff6d00;
+  
+}
+.botncar{
+  padding: .3em;
+ border: 1px solid #33691e  !important;
+ border-radius: 3px;
+ color: #33691e  !important;
+ transition:all .5s ease;
+}
+.botncar:hover{
+  box-shadow: 0px 0px 6px #33691e ;
+  
 }
 .medium-letter{
   color: #03a9f4 !important;
@@ -133,4 +156,9 @@ ul.azul li:hover{
    /* icon prefix focus color */
    .input-field .prefix.active {
       color: #01579b;
+   }
+   .subtotal{
+    font-size: 1.1em;
+    font-style: bold;
+    color: red;
    }

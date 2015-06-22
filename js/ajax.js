@@ -56,6 +56,7 @@ function verProdsRuta() {
     idProdcuto=document.agregarProductos.producto.value;
     Cantidad=document.agregarProductos.cantidad.value;
     ruta=document.agregarProductos.idruta.value;
+    dcto=document.agregarProductos.id_dcto.value;
     ajax.open("POST","productosRuta.php",true);
     ajax.onreadystatechange=function () {
       if (ajax.readyState==4){
@@ -65,5 +66,5 @@ function verProdsRuta() {
     }
   ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
     //enviando los valores a registro.php para que inserte los datos
-  ajax.send("id_prod="+idProdcuto+"&cantidad="+Cantidad+"&idruta="+ruta);
+  ajax.send("id_prod="+idProdcuto+"&cantidad="+Cantidad+"&idruta="+ruta+"&id_dcto="+dcto);
 }

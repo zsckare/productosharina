@@ -12,7 +12,7 @@
 <body class="gray-blue">
     <?php 
     session_start();
-    if(isset($_SESSION['u_user'])){
+    if($_SESSION['u_tipo']==1){
 
     }
     else{
