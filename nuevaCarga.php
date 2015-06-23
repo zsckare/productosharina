@@ -25,6 +25,11 @@ if ($row = mysql_fetch_row($rs)) {
 $id_dcto = trim($row[0]);
 }
 $id_dcto+=1;
+
+$consultaproductos=mysql_query("SELECT * FROM productos ");
+$numproductos=mysql_num_rows($consultaproductos);
+
+
  ?>
 <div class="backline be-blue"></div>
 	<div class="container espacio-arriba">
@@ -60,32 +65,54 @@ $id_dcto+=1;
 		
 	</div>
 
-  <div id="new" class="modal">
-    <div class="modal-content">
+<div id="new" class="modal">
+  <div class="modal-content">
       <h4 class="center-align">Agregar Producto</h4>
       <div class="row">
-        <form id="form" action="" name="agregarProductos" onsubmit="cargarProducto(); return false">
-          <div class="row">
-            <div class="input-field col s12 m6 l6 offset-l3 offset-m3">
-            	<?php 
-              echo '<input type="hidden" value='.$id_ruta.' name="idruta">';
-            	echo'<input type="hidden" name="id_dcto" value='.$id_dcto.' >';  
+      <form id="form" action="" name="agregarProductos" onsubmit="cargarProducto(); return false">
+      <?php 
+      $n=$numproductos/3;
+      $ci=round($n);
+
+      echo '<input type="hidden" value='.$id_ruta.' name="idruta">';
+              echo'<input type="hidden" name="id_dcto" value='.$id_dcto.' >';  
               echo'<input type="hidden" name="fecha" value='.$fecha.' >';
-            	       $queryConsulta="SELECT * FROM productos";
-            $result = mysql_query($queryConsulta);
-            while($campo=mysql_fetch_row($result)){
-                echo '  <div class="input-field">
-                  <label for="'.$campo[2].'">'.$campo[2].'</label>
-                  <input value="1" type="text" id="'.$campo[2].'">
-                </div>';
-            }
-             ?>
+          for ($i=0; $i <$ci ; $i++) { 
+            echo '<div class="row">';
+              for ($j=0; $j <3 ; $j++) { 
+                  while ($row = mysql_fetch_row($consultaproductos)){
+                    echo '
+                    <div class="col s6 m4 l4">
+                      <p>
+                          <input name="producto" type="radio" id="'.$row[2].'" value="'.$row[0].'" checked/>
+                          <label for="'.$row[2].'">'.$row[2].'</label>
+                      </p>
+                    </div>';
 
-        </form>
+                  }
+              }
+            echo '</div>';
+          }
+
+      ?>
+      <div class="row">
+           <div class="input-field col m3 s3 l2 offset-l3">
+            <input id="cant" type="number" name="cantidad" value="1">
+            <label for="cant">Cantidad</label>
+          </div>
+          <div class="col .s6 m3 l3">
+            <input name="Submit" type="submit" class="light-blue darken-4 btn-large " value="Agregar Producto" >
+          </div>       
+          
+          </div>
+      </form>
       </div>
-    </div>
-
   </div>
+</div>
+
+
+  
+
 
 
 	<!--SCRIPTS-->
