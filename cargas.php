@@ -75,34 +75,30 @@
   <div id="new" class="modal">
     <div class="modal-content">
       <h4 class="center-align">Seleccionar Ruta</h4>
-      <div class="row">
-        <form action="nuevaCarga.php" method="get">
-<div class="row">
-            <div class="input-field col s12 m6 offset-m3">
-            <select name="categoria" class="browser-default">
-              
+      <div class="row">              
             <?php 
 
-        $linkS=Conectarse();
+            $linkS=Conectarse();
             $queryConsulta="SELECT * FROM rutas order by id_ruta asc";
             $result = mysql_query($queryConsulta,$linkS);
-            while($campo=mysql_fetch_array($result)){
-              echo "<option value='".$campo['id_ruta']."'> ".$campo['nom_ruta']." </option>";
+            $totalderutas=mysql_num_rows($result);
+            while($campo=mysql_fetch_array($result)){ 
+              echo '<div class="row">';
+              echo '<div class="col s12 m12 l12">';
+              echo '
+              <form action="nuevaCarga.php" class="center" method="get ">
+                <input type="hidden" name="categoria" value="'.$campo['id_ruta'].'">
+
+                <input type="submit" class="btn light-blue darken-4 col m s12 m4 l4 " value="'.$campo['nom_ruta'].'">
+              </form>
+              </div>
+              </div>
+              ';
             }
              ?>
-            </select>
-          </div>
-</div>
-          <div class="row">
-          <div class="center">
-            <input type="submit" class="btn-large light-blue darken-4" value="Empezar Carga">
-          </div>       
-          
-          </div>
-        </form>
+            
       </div>
     </div>
-
   </div>
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

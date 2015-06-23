@@ -71,22 +71,39 @@ $id_dcto+=1;
               echo '<input type="hidden" value='.$id_ruta.' name="idruta">';
             	echo'<input type="hidden" name="id_dcto" value='.$id_dcto.' >';  
               echo'<input type="hidden" name="fecha" value='.$fecha.' >';
-            	       $queryConsulta="SELECT * FROM productos";
-            $result = mysql_query($queryConsulta);
+            	 ?>
+            <select name="producto" class="browser-default">
+              
+            <?php 
+
+        	$linkS=Conectarse();
+            $queryConsulta="SELECT * FROM productos";
+            $result = mysql_query($queryConsulta,$linkS);
             while($campo=mysql_fetch_row($result)){
-                echo '  <div class="input-field">
-                  <label for="'.$campo[2].'">'.$campo[2].'</label>
-                  <input value="1" type="text" id="'.$campo[2].'">
-                </div>';
+              echo "<option value='".$campo[0]."'> ".$campo[2]." </option>";
             }
              ?>
+            </select>
+          </div>
 
+          </div>
+          <div class="row">
+           <div class="input-field col m3 s12 l6 offset-l3">
+            <input id="cant" type="number" name="cantidad" value="1">
+            <label for="cant">Cantidad</label>
+          </div>
+          </div>
+          <div class="row">
+          <div class="center">
+            <input name="Submit" type="submit" class="light-blue darken-4 btn-large " value="Añadir Producto">
+          </div>       
+          
+          </div>
         </form>
       </div>
     </div>
 
   </div>
-
 
 	<!--SCRIPTS-->
     
