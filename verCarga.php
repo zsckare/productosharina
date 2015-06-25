@@ -20,6 +20,7 @@
 	$link=Conectarse();
 	$cons=mysql_query("SELECT codigo_ruta FROM rutas WHERE id_ruta='$id_ruta' ",$link);
 	$ruta=mysql_fetch_row($cons);
+	$nombreprodcuto="";
 	#--------------------------------------------------
 	#-------------------SCRIPT ACUMULADOR--------------
 	$acum=mysql_query("");
@@ -39,12 +40,17 @@
 				<?php 
 				$ruta=$_GET['id_ruta'];
 				$link2=Conectarse();
-					$result=mysql_query("SELECT * FROM `cargas` WHERE `ir_ruta`=$ruta ");
+					$result=mysql_query("SELECT * FROM `cargas` WHERE `ir_ruta`=$ruta ORDER BY id_producto");
 					while ($row = mysql_fetch_row($result)){
+						$ids=trim($row[2]);
+						$name=mysql_query("SELECT * FROM productos WHERE id_producto='$ids' ",$link);
+						if ($rows = mysql_fetch_row($name)) {
+							$nombreprodcuto = trim($rows[2]);
+						}
 					echo '<tr>
-							<td>'.$row[2].'</td>
+							<td>'.$nombreprodcuto.'</td>
 							<td>'.$row[3].'</td>
-						</tr>';
+						  </tr>';
 					}
 				 ?>
 				</tbody>

@@ -18,18 +18,6 @@ $link=Conectarse();
 		$ID_productos[$t]=$o[0];
 		$t++;
 	}
-	#----------------se hace un ciclo para crear las cargas vacias para cada producto--------
-
-		for ($p=0; $p <$total ; $p++) { 
-			$cipr=mysql_query("SELECT * FROM cargas WHERE ir_ruta='$idruta' AND id_producto='$ID_productos[$p]'  ");
-			if ($nume=mysql_num_rows($cipr)<1) {
-mysql_query("INSERT INTO cargas (`id_carga`, `ir_ruta`, `id_producto`, `existencia`, `fecha`) VALUES (NULL, '$idruta', '$ID_productos[$p]', 0, CURRENT_TIMESTAMP ) ");
-			
-			}else{
-				}
-		}
-
-	#---------------------------------------
 
 	$acumulador=0;
 	for ($i=0; $i <$total ; $i++) { 
@@ -44,8 +32,7 @@ mysql_query("INSERT INTO cargas (`id_carga`, `ir_ruta`, `id_producto`, `existenc
 			$acumulador=0;
 			$compruenaregistro=mysql_query("SELECT * FROM cargas WHERE ir_ruta='$idruta' AND id_producto='$ID_productos[$i]'  ");
 			if ($com=mysql_num_rows($compruenaregistro)>1) {
-				#si ya existe un registro anterior con el id del producto en turno se elimina de la tabla de cargas
-				$primer=mysql_query("SELECT id_carga FROM cargas WHERE id_producto='$ID_productos[$i]' AND ir_ruta='$idruta' ORDER BY fecha ASC LIMIT 1  ");
+			$primer=mysql_query("SELECT id_carga FROM cargas WHERE id_producto='$ID_productos[$i]' AND ir_ruta='$idruta' ORDER BY fecha ASC LIMIT 1  ");
 				if ($del=mysql_fetch_row($primer)) {
 					#echo "".$del[0];
 					$borrar=mysql_query("DELETE FROM cargas WHERE id_carga='$del[0]' ");
