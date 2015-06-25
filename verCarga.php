@@ -13,12 +13,16 @@
 
 <?php include 'navegacion.php'; ?>
 <?php 
+	# falta script para acumular los registros con el mismo producto pero diferente cantidad
 	$id_ruta=$_GET['id_ruta'];
 	
 	include("php/conexion.php");
 	$link=Conectarse();
 	$cons=mysql_query("SELECT codigo_ruta FROM rutas WHERE id_ruta='$id_ruta' ",$link);
 	$ruta=mysql_fetch_row($cons);
+	#--------------------------------------------------
+	#-------------------SCRIPT ACUMULADOR--------------
+	$acum=mysql_query("");
  ?>
 <div class="backline be-blue"></div>
 	<div class="container espacio-arriba">

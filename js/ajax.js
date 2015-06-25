@@ -15,7 +15,7 @@ function cargarProducto() {
 
   		}
   	}
-    console.log("!!!!!!!!!!!!"+"fecha"+fecha+"dcto"+dcto);
+    console.log("!!!!!!!!!!!!"+"fecha"+fecha+"dcto"+dcto+"Producto"+idProdcuto);
   ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
   	//enviando los valores a registro.php para que inserte los datos
 	ajax.send("id_dcto="+dcto+"&id_prod="+idProdcuto+"&cantidad="+Cantidad+"&idruta="+ruta+"&fecha="+fecha);

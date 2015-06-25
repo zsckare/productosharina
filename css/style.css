@@ -22,6 +22,24 @@ ul.azul li:hover{
 .eliminar{
    color: #d0181e !important;
 }
+.botonesadd{
+  background-color: #fff;
+height: 2em;
+width: 3em;
+border:1px solid #03a9f4 !important;
+border-radius: 1.2em;
+line-height: normal;
+color: #03a9f4;
+}
+.borrar{
+  background-color: #fff;
+height: 2em;
+width: 4em;
+border:1px solid #03a9f4 !important;
+border-radius: 1.2em;
+line-height: normal;
+color: #03a9f4;
+}
 .btnback{
   position: fixed;
   top: .75em;
