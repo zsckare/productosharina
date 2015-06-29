@@ -75,7 +75,10 @@
 				$link=Conectarse();
 				$insertar="INSERT INTO `productos` (`id_producto`, `codigoproducto`, `nombre`, `precio`) VALUES (NULL, '$codigo', '$nombre', '$precio');";
 				mysql_query($insertar)or die(mysql_error());
-				echo '<script type="text/javascript">alert("REGISTRADO :)");</script>';
+				echo '<script type="text/javascript">
+				alert("REGISTRADO :)");
+				</script>';
+				header("Location: productos.php");
 
 		}
 	?>

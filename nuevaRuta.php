@@ -22,7 +22,7 @@
 				<form action="nuevaRuta.php" method="POST" class="col m12" enctype="multipart/form-data">
 					<div class="row ">
 						<div class="center-align">
-								<div class="input-field col m8 s12 offset-m2">
+								<div class="input-field col m8 s12 l8 offset-l2 offset-m2">
 								<label for="ap" >Nombre de la Ruta</label>
 								<input id="ap" type="text" name="nombre" required>
 							</div>

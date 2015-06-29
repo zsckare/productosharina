@@ -1,8 +1,8 @@
 <?php
-	include("php/conexion.php");
 
-  $link3=Conectarse();
-  $consulta=mysql_query("SELECT * FROM movimientos WHERE id_ruta ='$id_ruta' AND fecha='$fecha' ",$link3);
+  $id_dcto=$_POST['id_dcto'];
+
+  $consulta=mysql_query("SELECT * FROM movimientos WHERE id_dcto='$id_dcto' AND tipo=1 ");
   echo '<table>
               <thead>
                 <tr>
@@ -17,8 +17,8 @@
         while ($row = mysql_fetch_row($consulta)){
           echo '<tr>
             <td>'.$row[1].'</td>
-            <td>'.$row[3].'</td>
-            <td><a onClick="eliminar('.$row[0].')">X</a></td>
+            <td>'.$row[4].'</td>
+            <td><a class="eliminar" onClick="eliminar('.$row[0].')">X</a></td>
           </tr>';
         }
         echo '</tbody>

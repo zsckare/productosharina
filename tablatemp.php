@@ -17,7 +17,7 @@ $id_dcto=$_POST['id_dcto'];
           echo '<tr>
             <td>'.$row[1].'</td>
             <td>'.$row[3].'</td>
-            <td><a onClick="eliminar('.$row[0].')">X</a></td>
+            <td><a onClick="eliminar('.$row[0].')" class="eliminar">X</a></td>
           </tr>';
         }
         echo '</tbody>

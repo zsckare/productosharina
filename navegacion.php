@@ -2,6 +2,7 @@
 $a='class=""';
 $b='class=""';
 $seccion="";
+$addmenu="";
 $archivo_actual = basename($_SERVER['PHP_SELF']); //Regresa el nombre del archivo actual
 
 switch($archivo_actual) //Valido en que archivo estoy para generar mi CSS de selección
@@ -23,7 +24,14 @@ switch($archivo_actual) //Valido en que archivo estoy para generar mi CSS de sel
    break;
      case "documentos.php":
    $seccion = "Documentos";
-   break;    case "nuevaCarga.php":
+   break;    
+   case "verDcto.php":
+    $addmenu='<li class="activo" ><a href="documentos.php">Documentos<i class="mdi-editor-insert-drive-file small left"></i></a></li>';
+   break;
+   case "nuevoProducto.php":
+    $addmenu='<li class="activo" ><a href="productos.php">Productos<i class="mdi-action-shopping-basket small left"></i></a></li>';
+   break;
+   case "nuevaCarga.php":
    $seccion = "Cargando Ruta";
    break;
  }
@@ -36,12 +44,14 @@ switch($archivo_actual) //Valido en que archivo estoy para generar mi CSS de sel
       <ul class="azul right hide-on-med-and-down">
       	<li <?php echo $a; ?>><a href="dashboard.php">Panel de Control <i class="mdi-action-settings small left"></i></a></li>
         <li <?php echo $b; ?>><a href="cargas.php">Cargas <i class="mdi-action-add-shopping-cart small left"></i></a></li>
+        <?php echo $addmenu;?>
         <li><a href="logout.php">Cerrar Sesion <i class="mdi-action-exit-to-app small left"></i></a></li>
 
       </ul>
       <ul class="side-nav" id="mobile-demo">
-  	<li class=""><a href="dashboard.php">Panel de Control<i class="mdi-action-settings small left"></i></a></li>
-        <li class=""><a href="cargas.php">Cargas<i class="mdi-action-add-shopping-cart small left"></i></a></li>
+  	    <li <?php echo $a; ?>><a href="dashboard.php">Panel de Control <i class="mdi-action-settings small left"></i></a></li>
+        <li <?php echo $b; ?>><a href="cargas.php">Cargas <i class="mdi-action-add-shopping-cart small left"></i></a></li>
+        <?php echo $addmenu;?>
         <li><a href="logout.php">Cerrar Sesion <i class="mdi-action-exit-to-app small left"></i></a></li>
       </ul>
     </div>

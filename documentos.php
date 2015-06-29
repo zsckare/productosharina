@@ -13,21 +13,22 @@
 <?php include 'navegacion.php'; ?>
 <div class="backline be-blue"></div>
   <div class="container">
-    <div class="card paddin-largo">
+    <div class="card paddin-largo " >
       <div class="row">
 
       </div>
       <h3 class="center-align">Lista de Documentos</h3>
-      <?php 
+      <div class="row"id="documentos">
+        <?php 
         include("php/conexion.php");
         $link=Conectarse();
-        $constula=mysql_query("SELECT * FROM documentos ",$link);
+        $constula=mysql_query("SELECT * FROM documentos ORDER BY hora DESC",$link);
         echo '<table>
               <thead>
                 <tr>
-                    <th data-field="id">Documento</th>
-                    <th data-field="name">Fecha</th>
-                    <th data-field="price">Ruta</th>
+                    <th data-field="id">Fecha</th>
+                    <th data-field="name">Ruta</th>
+                    <th data-field=""></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -35,18 +36,21 @@
               <tbody>';
         while ($row = mysql_fetch_row($constula)){
           echo '<tr>
-            <td>'.$row[2].'</td>
             <td>'.$row[1].'</td>
-            <td>'.$row[3].'</td>
-            <td>Ver</td>
-            <td>Edit</td>
+            <td>'.$row[2].'</td>
+            <td></td>
+            <td><a class="botnnva" href="verDcto.php?id_dcto='.$row[0].'" style="padding:.3em 1.2em !important;" >Ver</a></td>
+            <td>Editar</td>
           </tr>';
         }
         echo '</tbody>
       </table>';
        ?>
+
+      </div>
     </div>
   </div>
+
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

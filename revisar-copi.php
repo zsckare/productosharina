@@ -12,11 +12,9 @@
 <body class="gray-blue" >
 <?php include 'navegacion.php'; ?>
 <?php 
-
 	# en este archivo se hace la revision de que carga se llevo y que carga regreso
 	# asi como los calculos necesarios para saber con cuanto dinero tiene que entregar
 	# por las ventas realizadas
-
 $ruta="";
 	$fecha="";
 	if (isset($_POST['idruta'])) {
@@ -27,7 +25,6 @@ $ruta="";
 		
 	}
 	include("php/conexion.php");
-
 	$link=Conectarse();
 	$precio[0][0]="";
 	$result=mysql_query("SELECT * FROM productos ORDER BY id_producto ASC");
@@ -48,15 +45,14 @@ $ruta="";
 	#echo '</pre>';
 	$pi=0;
 	$pj=0;
-	$productosout[0]="";
-	$productosback[0]="";
-	$totalventa[0]=0;
+	$productostotales[0]="";
+	$totalventa[0]="";
 ?>
 <div class="backline be-blue"></div>
 <div class="container espacio-arriba">
 	<div class="card paddin-largo">
 		<div class="row">
-			<h4 class="center-align">Revision de Carga</h4>
+			<h4 class="center-align">Carga</h4>
 		</div>
 		<div class="row divider"></div>
 		<div class="row ">
@@ -78,7 +74,6 @@ $ruta="";
 
 					        <tbody>
 								<?php 
-
 								$reg=mysql_query("SELECT * FROM cargas WHERE ir_ruta='$ruta'ORDER BY id_producto ASC ");
 								while ($rs = mysql_fetch_row($reg)){
 									$ids=trim($rs[2]);
@@ -92,8 +87,8 @@ $ruta="";
 										<td>'.$nombreprodcuto.'</td>
 										<td>'.$rs[3].'</td>
 									</tr>';
-									$productosout[$pi]=$rs[3];
-									$pi++;
+									$productostotales[$pi]=$rs[3];
+								$pi++;
 								}
 								
 								 ?>
@@ -119,10 +114,10 @@ $ruta="";
 
 					        <tbody>
 								<?php 
-								$consulta="SELECT * FROM devoluciones WHERE id_ruta='$ruta' ORDER BY id_producto ASC";
+								$consulta="SELECT * FROM movimientos WHERE tipo=1 AND id_ruta='$ruta' ORDER BY id_producto ASC";
 								$res=mysql_query($consulta);
 								while ($rowa=mysql_fetch_row($res)) {
-										$id=trim($rowa[2]);
+										$id=trim($rowa[1]);
 										
 									$name=mysql_query("SELECT * FROM productos WHERE id_producto='$id' ",$link);
 									if ($rows = mysql_fetch_row($name)) {
@@ -130,21 +125,20 @@ $ruta="";
 										}
 									echo '<tr>
 									<td>'.$nombreprodcuto.'</td>
-									<td>'.$rowa[3].'</td>
+									<td>'.$rowa[4].'</td>
 									</tr>';
-									$productosback[$pj]=$rowa[3];
+									$productostotales[$pj]=$productostotales[$pj]-$rowa[4];
+									$totalventa[$pj]=$productostotales[$pj]*$precio[$pj][0];
 									$pj++;
-
 								}
 				
-
 								 ?>
 					        </tbody>
 						</table>
 				</div>
 			</div><!-- div que muestra con cuanto producto regereso -->
 
-			<div class="col s2 m2 l2">
+			<div class="col s1 m1 l1">
 				<div class="row">
 					<div class="center-align">
 						$
@@ -155,29 +149,16 @@ $ruta="";
 						<thead>
 							<tr>
 					              
-					              <th data-field="name">Total</th>
+					              <th data-field="name">Totventa</th>
 					          </tr>
 						</thead>
 						<tbody>
 							<?php 
-							$max=sizeof($productosout);
-							$vendidos[0]=0;
-							$vntproducto[0]=0;
-							for ($q=0; $q <$max ; $q++) { 
-								if ($productosback[$q]==0) {
-									$vendidos[$q]=$productosout[$q];
-								}else{
-									$vendidos[$q]=$productosout[$q]-$productosback[$q];
-								}
+							$max=sizeof($totalventa);
+							
+							for ($p=0; $p <$max ; $p++) { 
+								echo "<tr><td>$ ".$totalventa[$p].'</td></tr>';
 							}
-							for ($w=0; $w <$max ; $w++) { 
-								$vntproducto[$w]=$precio[$w][0]*$vendidos[$w];
-								echo '<tr>
-									<td>'.$vntproducto[$w].'</td>
-									</tr>';
-							}
-
-
 							 ?>
 
 						</tbody>
@@ -186,11 +167,11 @@ $ruta="";
 			</div><!-- div que muestra el total de venta de cada prodcuto -->
 		</div>
 		<div class="row">
-			<div class="col s4 m2 l2 offset-s8 offset-m10 offset-l10">
+			<div class="col s2 m2 l2 offset-m10 offset-m10 offset-l10">
 				<?php 
 				$subtotal=0;
-				for ($e=0; $e <$max ; $e++) { 
-					$subtotal+=$vntproducto[$e];
+				for ($o=0; $o <$max ; $o++) { 
+					$subtotal+=$totalventa[$o];
 				}
 				echo '<p class="subtotal">Subtotal: $'.$subtotal.'</p>';
 				?>
@@ -203,28 +184,16 @@ $ruta="";
 					<input type="hidden" name="ruta" value="'.$ruta.'">
 					<input type="hidden" name="subtotal" value="'.$subtotal.'">
 					';
-
 				 ?>
-				 <div class="center">
-				 	<input type="submit" value="Guardar" class="boton-largo botnnva" >
-				 </div>
-				
+				<input type="submit" value="actualizar" >
 			</form> 
 		</div><!-- div que contendra elformulario que afectara la carga -->
 	</div>
 </div>
 <?php 
-/*
-echo '<pre>';
-print_r($productosout);
-echo '</pre>';
-echo '<pre>';
-print_r($productosback);
-echo '</pre>';
-echo '<pre>';
-print_r($vendidos);
-echo '</pre>';
-*/	
+#echo '<pre>';
+#print_r($precio);
+#echo '</pre>';
  ?>
 
 

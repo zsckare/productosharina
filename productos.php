@@ -41,8 +41,8 @@
             <td>'.$row[1].'</td>
             <td>'.$row[3].'</td>
             <td></td>
-            <td><a href="editarProducto.php?idproducto='.$row[0].'">Editar</a></td>
-            <td><a href="eliminarProducto.php?idproducto='.$row[0].'" class="eliminar">Eliminar</a></td>
+            <td><a class="botncar" href="editarProducto.php?idproducto='.$row[0].'">Editar</a></td>
+            <td><a class="subtotal" href="eliminarProducto.php?idproducto='.$row[0].'" class="eliminar">Eliminar</a></td>
           </tr>';
         }
         echo '</tbody>

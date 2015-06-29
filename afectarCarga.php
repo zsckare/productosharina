@@ -48,51 +48,71 @@ date_default_timezone_set("America/Mexico_City");
     $i=0;
     $j=0;
 
-      $reg=mysql_query("SELECT * FROM cargas WHERE ir_ruta='$ruta'ORDER BY id_producto ASC ");
+      $reg=mysql_query("SELECT * FROM cargas WHERE ir_ruta='$ruta' ORDER BY id_producto ASC ");
       while ($row=mysql_fetch_row($reg)) {
         $id_producto[$i]=$row[2];
         $carga[$i]=$row[3];
         $i++;
       }
 
-  echo '<pre>';
-  print_r($carga);
-  echo '</pre>';
-echo "-----------------------------------------";
+ # echo '<pre>';
+ # #print_r($carga);
+ # echo '</pre>';
+#echo "-----------------------------------------";
+      /*
       $consulta=mysql_query("SELECT * FROM movimientos WHERE tipo=1 AND id_ruta='$ruta' ORDER BY id_producto ASC");
       while ($rs=mysql_fetch_row($consulta)) {
         $devolucion[$j]=$rs[4];
         $j++;
+      }*/
+      $consulta=mysql_query("SELECT * FROM devoluciones WHERE id_ruta='$ruta' ORDER BY id_producto ASC");
+      while ($rs=mysql_fetch_row($consulta)) {
+        $devolucion[$j]=$rs[3];
+        $j++;
       }
-  echo '<pre>';
-  print_r($devolucion);
-  echo '</pre>';
+  #echo '<pre>';
+  #print_r($devolucion);
+  #echo '</pre>';
 
-echo "-----------------------------------------";
+#echo "-----------------------------------------";
 
     $max=sizeof($carga);
     $restante[0]="";
     for ($k=0; $k <$max ; $k++) { 
-      $restante[$k]=$carga[$k]-$devolucion[$k];
-
+      if($devolucion[$k]==0){
+        $restante[$k]=0;
+      }else{
+      $restante[$k]=$devolucion[$k];
+    }
       
     }
 
-  echo '<pre>';
-  print_r($restante);
-  echo '</pre>';
+  #echo '<pre>';
+  #print_r($restante);
+  #echo '</pre>';
     #en el for voy actulizadno uno por uno la existencia restanteen la carga
     for ($l=0; $l <$max ; $l++) { 
      
-     $actualizar="UPDATE cargas SET existencia = $restante[$l] WHERE ir_ruta = '$ruta' AND id_producto ='$id_producto[$l]'";
+     $actualizar="UPDATE cargas SET existencia = $restante[$l] WHERE ir_ruta = '$ruta' AND id_producto ='$id_producto[$l]' ";
      mysql_query($actualizar)or die(mysql_error());
-echo '<script type="text/javascript">console.log("actualizadp :)");</script>';
+#echo '<script type="text/javascript">console.log("actualizadp :)");</script>';
     }
 
   #$actualizar="UPDATE cargas SET existencia = $restante WHERE id_ruta = '$ruta' id_producto ='$id_producto'";
+    $actdcto=mysql_query("SELECT * FROM documentos WHERE id_dcto = '$id_dcto' ");
+    $totgastos="";
+    $totnotas="";
+    $grantotal=0;
+    $fila=mysql_fetch_row($actdcto);
+    $totnotas=$fila[5];
+    $totgastos=$fila[4];
+    $grantotal=$sub-($totgastos+$totnotas);
 
-    $updatedcto=mysql_query("UPDATE documentos SET totventa = $sub WHERE id_dcto = '$id_dcto' AND fecha = '$hoy' " );
+    $updatedcto=mysql_query("UPDATE documentos SET totventa=$grantotal, subtotal = $sub WHERE id_dcto = '$id_dcto' AND fecha = '$hoy' " );
 
+    //--------------------Vaciar tabla de devoluciones-----------
+    $del=mysql_query("DELETE FROM devoluciones WHERE id_ruta='$ruta' ");
+    header("Location: dashboard.php");
 
      ?>
 

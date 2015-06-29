@@ -1,12 +1,13 @@
 <?php 
 	session_start();
 
-	$user=$_POST['usuario'];
-	$pwd=$_POST['password'];
-
+	$user=trim($_POST['usuario']);
+	$pwd=trim($_POST['password']);
+	$encryp=md5($pwd);
+	
 	include 'php/conexion.php';
 	$link=Conectarse();
-    $con=mysql_query("SELECT * FROM usuarios WHERE usuario='$user' AND password='$pwd' ",$link);
+    $con=mysql_query("SELECT * FROM usuarios WHERE usuario='$user' AND password='$encryp' ",$link);
 
 	if($resultado = mysql_fetch_array($con)){
 		$_SESSION['u_user']=$user;

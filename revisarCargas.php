@@ -23,6 +23,8 @@
 if ($row = mysql_fetch_row($rs)) {
 $id_dcto = trim($row[0]);
 }
+$consultaproductos=mysql_query("SELECT * FROM productos ");
+$numproductos=mysql_num_rows($consultaproductos);
  ?>
 <div class="backline be-blue"></div>
   <div class="container espacio-arriba">
@@ -41,7 +43,7 @@ $id_dcto = trim($row[0]);
       
       </div><!--tabla de productos agregados-->
       <div class="row">
-        <form action="revisar.php" method="Post">
+        <form action="devoluciones.php" method="Post">
           <?php echo '
             <input type="hidden" value='.$id_ruta.' name="idruta">
             <input type="hidden" value='.$fecha.' name="fecha">
@@ -59,44 +61,84 @@ $id_dcto = trim($row[0]);
   </div>
 
   <div id="new" class="modal">
-    <div class="modal-content">
+  <div class="modal-content">
       <h4 class="center-align">Agregar Producto</h4>
       <div class="row">
-        <form id="form" action="" name="agregarProductos" onsubmit="verProdsRuta(); return false">
-          <div class="row">
-            <div class="input-field col s12 m6 offset-m3">
-              <?php 
-              echo '<input type="hidden" value='.$id_ruta.' name="idruta">
-              <input type="hidden" value='.$id_dcto.' name="id_dcto">';
-               ?>
-            <select name="producto" class="browser-default">
-              
-            <?php 
+      <form id="form" action="" name="agregarProductos" onsubmit="verProdsRuta(); return false">
+      <?php 
+      $n=$numproductos/3;
+      $ci=round($n);
 
-          $linkS=Conectarse();
-            $queryConsulta="SELECT * FROM productos";
-            $result = mysql_query($queryConsulta,$linkS);
-            while($campo=mysql_fetch_row($result)){
-              echo "<option value='".$campo[0]."'> ".$campo[2]." </option>";
-            }
-             ?>
-            </select>
+      echo '<input type="hidden" value='.$id_ruta.' name="idruta">';
+              echo'<input type="hidden" name="id_dcto" value='.$id_dcto.' >';  
+              echo'<input type="hidden" name="fecha" value='.$fecha.' >';
+          for ($i=0; $i <$ci ; $i++) { 
+            echo '<div class="row">';
+              for ($j=0; $j <3 ; $j++) { 
+                  while ($row = mysql_fetch_row($consultaproductos)){
+                    echo '
+                    <div class="col s6 m4 l4">
+                      <p>
+                          <input name="producto" type="radio" id="'.$row[2].'" value="'.$row[0].'" checked/>
+                          <label for="'.$row[2].'">'.$row[2].'</label>
+                      </p>
+                    </div>';
+
+                  }
+              }
+            echo '</div>';
+          }
+
+      ?>
+      <div class="row">
+           <div class="input-field col m1 s2 l1 ">
+            <input id="cant" type="number" name="cantidad" value="0" style="width:3em;">
+            <label for="cant" class="active">Cantidad</label>
           </div>
-          <div class="col m3 s12 ">
-            <input type="number" name="cantidad">
-          </div>
-          </div>
+
+          <div class="col s9 m9 l9  ">
           <div class="row">
-          <div class="center">
-            <input name="Submit" type="submit" class="light-blue darken-4 btn-large " value="Agregar">
-          </div>       
+            <div class="col s9 m9 l9">
+              <div class="row">
+                <div class="col s3 m3 offset-s1 offset-m1 "><input type="button" value="9" class="botonesadd" onclick="add('9')" ></div>
+                <div class="col s3 m3 "><input type="button" value="8" class="botonesadd" onclick="add('8')"></div>
+                <div class="col s3 m3 "><input type="button" value="7" class="botonesadd" onclick="add('7')"></div>
+              </div>
+              <div class="row">
+                <div class="col s3 m3 offset-s1 offset-m1 "><input type="button" value="6" class="botonesadd" onclick="add('6')"></div>
+                <div class="col s3 m3 "><input type="button" value="5" class="botonesadd" onclick="add('5')"></div>
+                <div class="col s3 m3 "><input type="button" value="4" class="botonesadd" onclick="add('4')"></div>
+              </div>
+              <div class="row">
+                <div class="col s3 m3 offset-s1 offset-m1 "><input type="button" value="3" class="botonesadd" onclick="add('3')"></div>
+                <div class="col s3 m3 "><input type="button" value="2" class="botonesadd" onclick="add('2')"></div>
+                <div class="col s3 m3 "><input type="button" value="1" class="botonesadd" onclick="add('1')"></div>
+              </div>
+              <div class="row">
+                <div class="col s3 m3 offset-s1 offset-m1 "><input type="button" value="0" class="botonesadd" onclick="add('0')"></div>
+                <div class="col s6 m3 "><input type="button" value="Borrar" onclick="borrar();" class="borrar"></div>
+              </div>
+            </div>
+            <div class="col s3 m3 l3">
+              <div class="row">
+              <div class="col s2 m2 l2">
+              <input name="Submit" type="submit" class="light-blue darken-4 btn " value="Agregar" >
+            </div>
+          </div>
+            </div>
+            
+
+          </div>
+                      
+          </div>
+    
           
           </div>
-        </form>
+      </from>
       </div>
-    </div>
-
   </div>
+</div>
+
 
   <!--SCRIPTS-->
     
@@ -104,6 +146,21 @@ $id_dcto = trim($row[0]);
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
     <script src="js/ajax.js"></script>
-  <script></script>
+    <script>
+  function add (numero) {
+    addProductos=document.agregarProductos.cantidad.value;
+    addProductos+=numero;
+    console.log("-----");
+    console.log("- addProductos -");
+    console.log("Cambiando valor en el input por:"+addProductos);
+    document.agregarProductos.cantidad.value=addProductos;
+    
+  }
+  function borrar(){
+    console.log("-----");
+    console.log("Limpiando el valor del input cantidad");
+    document.agregarProductos.cantidad.value="";
+  }
+  </script>
 </body>
 </html>

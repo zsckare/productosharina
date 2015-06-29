@@ -37,13 +37,13 @@ $numproductos=mysql_num_rows($consultaproductos);
   <div class="col s12 m12 l12">
         <div class="card paddin-largo ">
       <div class="row">
-                    <h3 class="center-align">Nueva Carga</h3>
-            </div>
-            <div class="row">
-              <p class="col m3 s3 ">Ruta:&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $id_ruta;  ?></p>
-              <p class="col m3 s3 ">Fecha:&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $fecha; ?></p>
-                <a href="#new" class="col m2 s1 offset-m3 offset-s7 modal-trigger  medium-letter"><p class="center-align botnnva">Agregar Producto</p></a>
-            </div>
+          <h3 class="center-align">Nueva Carga</h3>
+      </div>
+      <div class="row">
+              <p class="col s2 m3 l3">Ruta:&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $id_ruta;  ?></p>
+              <p class="col s3 m3 l3">Fecha:&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $fecha; ?></p>
+              <a href="#new" class="col s3 m2 l3 offset-m3 offset-l3 modal-trigger  medium-letter botnnva"><span class="center-align ">Agregar Producto</span></a>
+      </div>
       <div id="prodCargados" class="row"><!--tabla de productos agregados-->
       
       </div><!--tabla de productos agregados-->
@@ -97,7 +97,7 @@ $numproductos=mysql_num_rows($consultaproductos);
       ?>
       <div class="row">
            <div class="input-field col m1 s2 l1 ">
-            <input id="cant" type="number" name="cantidad" value="0">
+            <input id="cant" type="number" name="cantidad" value="0" style="width:3em;">
             <label for="cant" class="active">Cantidad</label>
           </div>
 
@@ -121,6 +121,7 @@ $numproductos=mysql_num_rows($consultaproductos);
               </div>
               <div class="row">
                 <div class="col s3 m3 offset-s1 offset-m1 "><input type="button" value="0" class="botonesadd" onclick="add('0')"></div>
+                <div class="col s3 m3  "><input type="button" value="00" class="botonesadd" onclick="add('00')"></div>
                 <div class="col s6 m3 "><input type="button" value="Borrar" onclick="borrar();" class="borrar"></div>
               </div>
             </div>
