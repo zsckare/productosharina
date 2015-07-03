@@ -17,18 +17,18 @@
 <div class="row">
   <div class="col s12 m12 l12">
         <div class="card paddin-largo">
-            <h3 class="center-align">Carga</h3>
+            <h3 class="center-align">Consultar Carga</h3>
    
     <div class="row">
         <form action="cargas.php" method="post">
           <div class="row">
-            <div class="input-field col s2 m2 l2 offset-s3 offset-m3 offset-l3">
-              <label for="ia">Selecione una Fecha</label>
+            <div class="input-field col s2 m2 l2 offset-s2 offset-m2 offset-l2">
+              <label for="ia">Selecionar  Fecha</label>
                <input type="date" class="datepicker" name="fecha">
             </div>
-            <div class="input-field col s3 m3 l3">
+            <div class="input-field col s4 m4 l4">
              <select name="ruta" class="browser-default">
-              
+              <option value="" disabled selected>Seleccione una Ruta</option>
             <?php 
             $ruta="";
    include("php/conexion.php");
@@ -42,7 +42,7 @@
             </select>
             </div>
             <div class="input-field col s2 m2 l2">
-              <input type="submit" class="btn-large " style="margin-top:-.2em;" value="Consultar">
+              <input type="submit" class="btn-large " style="margin-top:-.2em;" value="Ver Carga">
             </div>
           </div>
         </form>

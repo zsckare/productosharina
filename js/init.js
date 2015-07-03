@@ -2,6 +2,9 @@
   $(function(){
 
     $('.button-collapse').sideNav();
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
     $('.modal-trigger').leanModal();
     $('select').material_select();
     $("input[type=number]").focus(function(){	   

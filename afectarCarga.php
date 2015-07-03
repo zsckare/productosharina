@@ -29,17 +29,15 @@ date_default_timezone_set("America/Mexico_City");
   }
   include ('php/conexion.php');
   $link=Conectarse(); 
-    $rs = mysql_query("SELECT MAX(id_dcto) AS id FROM documentos WHERE id_ruta = '$ruta' ",$link);
-  if ($row = mysql_fetch_row($rs)) {
-  $id_dcto = trim($row[0]);
-  }
+  $id_dcto=$_POST['id_dcto'];
   $sub=trim($_POST['subtotal']);
   $totventa="";
   $hoy=date("Y-m-d");
   $sql="UPDATE documentos SET `totventa` = '$totventa' WHERE `id_dcto` = '$id_dcto' ";
   #aqui agregare el dinero que le falte al vendedor a la tabla de extras
   $faltante=$_POST['faltante'];
-  $fal=mysql_query("UPDATE extras SET `faltante` = '$faltante' WHERE `id_dcto` = '$id_dcto' ");
+  $faltantedecimales=$faltante.".0";
+  $fal=mysql_query("UPDATE extras SET `faltante` = '$faltantedecimales' WHERE `id_dcto` = '$id_dcto' ");
 
 ?>
     <div class="container">
@@ -110,8 +108,10 @@ date_default_timezone_set("America/Mexico_City");
     $viaticos=$r[4];
     $lavado=$r[5];
     $otros=$r[6];
-    $gastos=$promo+$gasolina+$viaticos+$lavado+$otros;
-    $actulizargastos=mysql_query("UPDATE documentos SET totgastos ='$gastos' WHERE id_dcto='$id_dcto' ");
+    $falt=$r[7];
+    $gastos=$promo+$gasolina+$viaticos+$lavado+$otros+$falt;
+    echo($gastos);
+    $actulizargastos=mysql_query("UPDATE`documentos` SET `totgastos` = '$gastos' WHERE `documentos`.`id_dcto` ='$id_dcto' ");
 
   #$actualizar="UPDATE cargas SET existencia = $restante WHERE id_ruta = '$ruta' id_producto ='$id_producto'";
     $actdcto=mysql_query("SELECT * FROM documentos WHERE id_dcto = '$id_dcto' ");

@@ -17,18 +17,25 @@
 	# asi como los calculos necesarios para saber con cuanto dinero tiene que entregar
 	# por las ventas realizadas
 
-$ruta="";
+$ruta="";$id_dcto="";
 	$fecha="";
 	if (isset($_POST['idruta'])) {
 		$ruta=$_POST['idruta'];
+
 		
 	}else{
 		$ruta=$_GET['idruta'];
 		
 	}
 	include("php/conexion.php");
-
-	$link=Conectarse();
+		$link=Conectarse();
+	$rs = mysql_query("SELECT MAX(id_dcto) AS id FROM documentos WHERE id_ruta='$ruta' ");
+	if ($row = mysql_fetch_row($rs)) {
+		$id_dcto = trim($row[0]);
+	}
+	$nameruta=mysql_query("SELECT nom_ruta FROM rutas WHERE id_ruta='$ruta' ");
+	$nr=mysql_fetch_row($nameruta);
+	$nombreruta=$nr[0];
 	$precio[0][0]="";
 	$result=mysql_query("SELECT * FROM productos ORDER BY id_producto ASC");
 	$totfilas=mysql_num_rows($result);
@@ -56,7 +63,7 @@ $ruta="";
 <div class="container espacio-arriba">
 	<div class="card paddin-largo">
 		<div class="row">
-			<h4 class="center-align">Revision de Carga</h4>
+			<h4 class="center-align">Revision de Carga de <?php echo $nombreruta; ?></h4>
 		</div>
 		<div class="row divider"></div>
 		<div class="row ">
@@ -79,7 +86,7 @@ $ruta="";
 					        <tbody>
 								<?php 
 
-								$reg=mysql_query("SELECT * FROM movimientos WHERE id_ruta='$ruta' AND tipo=0 ORDER BY id_producto ASC ");
+								$reg=mysql_query("SELECT * FROM movimientos WHERE id_ruta='$ruta' AND tipo=0 AND id_dcto='$id_dcto' ORDER BY id_producto ASC ");
 								while ($rs = mysql_fetch_row($reg)){
 									$ids=trim($rs[1]);
 									$name=mysql_query("SELECT * FROM productos WHERE id_producto='$ids' ",$link);
@@ -119,7 +126,7 @@ $ruta="";
 
 					        <tbody>
 								<?php 
-								$consulta="SELECT * FROM movimientos WHERE id_ruta='$ruta' AND tipo =1 ORDER BY id_producto ASC";
+								$consulta="SELECT * FROM movimientos WHERE id_ruta='$ruta' AND tipo =1 AND id_dcto='$id_dcto' ORDER BY id_producto ASC";
 								$res=mysql_query($consulta);
 								while ($rowa=mysql_fetch_row($res)) {
 										$id=trim($rowa[1]);
@@ -201,6 +208,7 @@ $ruta="";
 				<?php 
 					echo '
 					<input type="hidden" name="ruta" value="'.$ruta.'">
+					<input type="hidden" name="id_dcto" value="'.$id_dcto.'">
 					<input type="hidden" name="subtotal" value="'.$subtotal.'">
 					<div class="row">
 						<div class="input-field col s3 m2 l2 offset-l10 offset-s9 offset-lm0">

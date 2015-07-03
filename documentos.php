@@ -15,14 +15,40 @@
   <div class="container">
 <div class="row">
 <div class="col s12 m12 l12">
-        <div class="card paddin-largo" >
+    <div class="card paddin-largo" >
 
-      <h3 class="center-align">Lista de Documentos</h3>
+    <div class="row">
+            <h3 class="center-align">Lista de Documentos</h3>
+    </div>
+    <div class="row">
+        <form action="documentos.php" method="post">
+          <div class="row">
+            <div class="input-field col s2 m2 l2 offset-s2 offset-m2 offset-l2">
+              <label for="ia">Selecionar  Fecha</label>
+               <input type="date" class="datepicker" name="fecha">
+            </div>
+
+            <div class="input-field col s2 m2 l2">
+              <input type="submit" class="btn-large " style="margin-top:-.2em;" value="Ver Documentos">
+            </div>
+          </div>
+        </form>
+  
+    </div><!--Formulario-->
       <div class="row"id="documentos">
         <?php 
+        $fecha="";
+        $constula="";
         include("php/conexion.php");
-        $link=Conectarse();
-        $constula=mysql_query("SELECT * FROM documentos WHERE visible=0 ORDER BY hora DESC ",$link);
+        $linkS=Conectarse();
+        if(isset($_POST['fecha'])){
+          $fecha=date("Y-m-d", strtotime($_POST['fecha']));
+          $constula=mysql_query("SELECT * FROM documentos WHERE visible=0 AND fecha='$fecha'  ORDER BY hora DESC ");
+        }else{
+          $constula=mysql_query("SELECT * FROM documentos WHERE visible=0 ORDER BY hora DESC ");
+        }
+
+        
         echo '<table>
               <thead>
                 <tr>

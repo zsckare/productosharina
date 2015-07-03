@@ -37,6 +37,9 @@
 	<div class="card paddin-largo">
 	<div class="row">
 	<div class="col s12 m12 l12">
+	<div class="row">
+		<h4 class="center-align">Agregar Productos a Ruta</h4>
+	</div>
 			<form action="addCarga.php" method="post" name="agregarProductos">
 			<?php 
 				for ($i=0; $i <$ci ; $i++) { 

@@ -36,6 +36,9 @@
 ?>
 <div class="container">
 	<div class="card paddin-largo">
+	<div class="row">
+		<h4 class="center-align">Productos Que regresaron</h4>
+	</div>
 		<form action="addDevolucion.php" method="post">
 			<?php 
 				for ($i=0; $i <$ci ; $i++) { 

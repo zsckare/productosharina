@@ -25,7 +25,10 @@ $idruta=$row[2];
 $cons=mysql_query("SELECT nom_ruta FROM rutas WHERE id_ruta='$idruta' ");
 $fila=mysql_fetch_row($cons);
 $nombreruta=$fila[0];
-
+$rs = mysql_query("SELECT MAX(id_dcto) AS id FROM documentos WHERE id_ruta='$idruta' ");
+  if ($rowa = mysql_fetch_row($rs)) {
+    $id_dcto = trim($rowa [0]);
+  }
  ?>
 <div class="backline be-blue"></div>
   <div class="container">
@@ -43,18 +46,105 @@ $nombreruta=$fila[0];
     </div><!-- encabezado-->
 
     <div class="row">
-      <div class="col s8 m8 l8 offset-s2 offset-m2 offset-l2 ">
-        <ul class="collection with-header collapsible" data-collapsible="expandable">
-          
-          <li class="collection-item">
-              <span class="">Subtotal Ventas</span>
+      <div class="col s10 m10 l10 offset-s1 offset-m1 offset-l1">
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><span class="">Subtotal Ventas</span>
               <span class="espacio-der" ><?php echo $row[7]; ?></span>
-          </li>
-          <li class="collection-item"><span>Total de Gastos</span><span style="margin-left:15.3em;" ><?php echo $row[4]; ?></span> </li>
-          <li class="collection-item"><span>Notas a Credito</span><span style="margin-left:15.5em;"><?php echo $row[5]; ?></span> </li>
-          <li class="collection-header"><span class="totales">Gran Total</span><span class="totales" style="margin-left:6.8em;" ><?php echo "$".$row[3]; ?></span></li>
-        </ul>
+              </div>
+              <div class="collapsible-body">
+                    <div class="row">
+      <?php 
+      $nombreprodcuto="";
+        if (isset($_POST['ruta'])) {
+          $ruta=trim($_POST['ruta']);
+          $fecha=date("Y-m-d", strtotime($_POST['fecha']));
 
+        }
+
+      ?>
+  <div class="col s6 m6 l6">
+    <table>
+                 <thead>
+                    <tr>
+                        <th data-field="id">nombre</th>
+                        <th data-field="name">se llevo</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                <?php 
+                $reg=mysql_query("SELECT * FROM movimientos WHERE id_ruta='$idruta' AND tipo=0 AND id_dcto='$id_dcto' ORDER BY id_producto ASC ");
+                while ($rs = mysql_fetch_row($reg)){
+                  $ids=trim($rs[1]);
+                  $name=mysql_query("SELECT * FROM productos WHERE id_producto='$ids' ",$link);
+                  if ($rows = mysql_fetch_row($name)) {
+                    $nombreprodcuto = trim($rows[2]);
+                    }
+                    
+                  
+                echo '<tr>
+                    <td>'.$nombreprodcuto.'</td>
+                    <td>'.$rs[3].'</td>
+                  </tr>';
+
+                }
+                
+                 ?>
+                  </tbody>
+            </table>
+  </div>
+<div class="col s6 m6 l6">
+  <table>
+                 <thead>
+                    <tr>
+                        <th data-field="id">nombre</th>
+                        <th data-field="name">regreso</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                <?php 
+                $consulta="SELECT * FROM movimientos WHERE id_ruta='$idruta' AND tipo =1 AND id_dcto='$id_dcto' ORDER BY id_producto ASC";
+                $res=mysql_query($consulta);
+                while ($rowa=mysql_fetch_row($res)) {
+                    $id=trim($rowa[1]);
+                    
+                  $name=mysql_query("SELECT * FROM productos WHERE id_producto='$id' ",$link);
+                  if ($rows = mysql_fetch_row($name)) {
+                    $nombreprodcuto = trim($rows[2]);
+                    }
+                  echo '<tr>
+                  <td>'.$nombreprodcuto.'</td>
+                  <td>'.$rowa[4].'</td>
+                  </tr>';
+            
+
+                }
+        
+
+                 ?>
+                  </tbody>
+            </table>
+          </div>
+
+              </div>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><span>Total de Gastos</span><span style="margin-left:15.3em;" ><?php echo $row[4]; ?></span> </div>
+              <div class="collapsible-body"></div>
+            </li>
+            <li>
+              <div class="collapsible-header"><span>Notas a Credito</span><span style="margin-left:15.5em;"><?php echo $row[5]; ?></span></div>
+              <div class="collapsible-body"></div>
+            </li>
+            <li>
+              <div class="collapsible-header">
+                <span class="totales">Gran Total</span><span class="totales" style="margin-left:17em;" ><?php echo "$".$row[3]; ?></span>
+              </div>
+            </li>
+          </ul>
       </div>
     </div>
     </div>

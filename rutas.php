@@ -19,12 +19,12 @@
         include("php/conexion.php");
         $link=Conectarse();
         $constula=mysql_query("SELECT * FROM rutas ",$link);
-        echo '<table>
+        echo '<table class="striped">
               <thead>
                 <tr>
                     <th data-field="id">Nombre</th>
-                    <th data-field="name">Codigo</th>
-                    <th></th>
+                    <th data-field="name"></th>
+                    
                     <th></th>
                     <th></th>
                 </tr>
@@ -33,10 +33,10 @@
         while ($row = mysql_fetch_row($constula)){
           echo '<tr>
             <td>'.$row[2].'</td>
-            <td>'.$row[1].'</td>
+
             <td><a class="botncar" href="addProductos2.php?idruta='.$row[0].'"'.'>Nueva Carga</a></td>
             <td><a class="botnret" href="addReturn.php?idruta='.$row[0].'"'.'>Regreso</a></td>
-            <td><a class="botnnva" href="revisar.php?idruta='.$row[0].'"'.'>Revisar</a></td>
+            
           </tr>';
         }
         echo '</tbody>

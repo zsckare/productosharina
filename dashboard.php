@@ -22,8 +22,8 @@
 
 <?php include ('navegacion.php'); ?>
 <div class="backline be-blue"></div>
-  <div class="container espacio-arriba">
-    <div class="row">
+  <div class="container ">
+    <div class="row" style="margin-top:1.2em;">
       <a href="rutas.php" class="pnl card col m4 s12 l4 offset-m1 offset-l1 be-blue-letras hoverable">
           <div class="row ">
             <div class="col m12 s12 l12 center-align ">

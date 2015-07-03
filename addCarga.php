@@ -4,11 +4,13 @@ $idruta=trim($_POST['idruta']);
 	include("php/conexion.php");
 	$link=Conectarse();
 	//se crea un nuevo documento
-	$insertar="INSERT INTO `harina`.`documentos` (`id_dcto`, `fecha`, `id_ruta`) VALUES (NULL, '$fecha', '$idruta')";
+	$insertar="INSERT INTO `documentos` (`id_dcto`, `fecha`, `id_ruta`) VALUES (NULL, '$fecha', '$idruta')";
 	if (mysql_query($insertar)) {
 		$id_dcto=mysql_insert_id();
 	}
-
+	//-----------crear nuevo extra para el documento creado---
+		$extra=mysql_query("INSERT INTO extras (id_exttra, id_dcto) VALUES (NULL, $id_dcto) ");
+	//--------------------------------------------------------
 	$traerProductos="SELECT * FROM productos ORDER BY id_producto";
 	$query=mysql_query($traerProductos);
 	$max=mysql_num_rows($query);

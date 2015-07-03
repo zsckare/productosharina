@@ -89,8 +89,7 @@
 			$lavado=trim($_POST['lavado']);
 			$promociones=trim($_POST['promocion']);
 			$otros=trim($_POST['otros']);
-
-			$insertar=mysql_query("INSERT INTO extras (`id_exttra`, `id_dcto`, `promocion`, `gasolina`, `viaticos`, `lavado`, `gastosvarios`) VALUES ('', '$dcto', '$promociones', '$gasolina', '$viaticos', '$lavado', '$otros')");
+			$actualizar=mysql_query("UPDATE extras SET promocion ='$promociones', gasolina='$gasolina', viaticos='$viaticos', lavado='$lavado', gastosvarios='$otros' WHERE id_dcto='$dcto' ");
 			echo '<script>
 		    alert("Registrado");
 		    </script>';

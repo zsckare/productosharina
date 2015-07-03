@@ -31,7 +31,6 @@
                     <th data-field="price">Precio</th>
                     <th></th>
                     <th></th>
-                    <th></th>
                 </tr>
               </thead>
               <tbody>';
@@ -42,8 +41,7 @@
             <td>'.$row[3].'</td>
             <td></td>
             <td><a class="botncar" href="editarProducto.php?idproducto='.$row[0].'">Editar</a></td>
-            <td><a class="subtotal" href="eliminarProducto.php?idproducto='.$row[0].'" class="eliminar">Eliminar</a></td>
-          </tr>';
+            </tr>';
         }
         echo '</tbody>
       </table>';
