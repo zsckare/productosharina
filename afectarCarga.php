@@ -36,7 +36,11 @@ date_default_timezone_set("America/Mexico_City");
   $sub=trim($_POST['subtotal']);
   $totventa="";
   $hoy=date("Y-m-d");
-  $sql="UPDATE `harina`.`documentos` SET `totventa` = '$totventa' WHERE `documentos`.`id_dcto` = '$id_dcto' ";
+  $sql="UPDATE documentos SET `totventa` = '$totventa' WHERE `id_dcto` = '$id_dcto' ";
+  #aqui agregare el dinero que le falte al vendedor a la tabla de extras
+  $faltante=$_POST['faltante'];
+  $fal=mysql_query("UPDATE extras SET `faltante` = '$faltante' WHERE `id_dcto` = '$id_dcto' ");
+
 ?>
     <div class="container">
       <div class="card">
@@ -97,6 +101,17 @@ date_default_timezone_set("America/Mexico_City");
      mysql_query($actualizar)or die(mysql_error());
 #echo '<script type="text/javascript">console.log("actualizadp :)");</script>';
     }
+    #AQUI acumulare los gastos que haya tenido el vendedor 
+    $gastos="";
+    $gstos=mysql_query("SELECT * FROM extras WHERE id_dcto='$id_dcto'");
+    $r=mysql_fetch_row($gstos);
+    $promo=$r[2]; 
+    $gasolina=$r[3];
+    $viaticos=$r[4];
+    $lavado=$r[5];
+    $otros=$r[6];
+    $gastos=$promo+$gasolina+$viaticos+$lavado+$otros;
+    $actulizargastos=mysql_query("UPDATE documentos SET totgastos ='$gastos' WHERE id_dcto='$id_dcto' ");
 
   #$actualizar="UPDATE cargas SET existencia = $restante WHERE id_ruta = '$ruta' id_producto ='$id_producto'";
     $actdcto=mysql_query("SELECT * FROM documentos WHERE id_dcto = '$id_dcto' ");
@@ -106,7 +121,9 @@ date_default_timezone_set("America/Mexico_City");
     $fila=mysql_fetch_row($actdcto);
     $totnotas=$fila[5];
     $totgastos=$fila[4];
-    $grantotal=$sub-($totgastos+$totnotas);
+    $gastosnega=$totgastos+$totnotas;
+    $algo=$sub-$gastosnega;
+    $grantotal=$algo;
 
     $updatedcto=mysql_query("UPDATE documentos SET totventa=$grantotal, subtotal = $sub WHERE id_dcto = '$id_dcto' AND fecha = '$hoy' " );
 

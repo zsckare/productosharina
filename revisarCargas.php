@@ -47,6 +47,7 @@ $numproductos=mysql_num_rows($consultaproductos);
           <?php echo '
             <input type="hidden" value='.$id_ruta.' name="idruta">
             <input type="hidden" value='.$fecha.' name="fecha">
+            <input type="hidden" value='.$id_dcto.' name="id_dcto">
           '; ?>
           <div class="center">
             <input type="submit" value="Guardar Carga" class="light-blue darken-4 btn">

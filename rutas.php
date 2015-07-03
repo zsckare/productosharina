@@ -34,9 +34,9 @@
           echo '<tr>
             <td>'.$row[2].'</td>
             <td>'.$row[1].'</td>
-            <td>Ver</td>
-            <td>Edit</td>
-            <td>Eliminar</td>
+            <td><a class="botncar" href="addProductos2.php?idruta='.$row[0].'"'.'>Nueva Carga</a></td>
+            <td><a class="botnret" href="addReturn.php?idruta='.$row[0].'"'.'>Regreso</a></td>
+            <td><a class="botnnva" href="revisar.php?idruta='.$row[0].'"'.'>Revisar</a></td>
           </tr>';
         }
         echo '</tbody>

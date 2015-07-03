@@ -29,50 +29,38 @@ $nombreruta=$fila[0];
  ?>
 <div class="backline be-blue"></div>
   <div class="container">
-    <div class="card paddin-largo">
-	<div class="row"><h4 class="center-align">Documento <?php echo " #".$row[0]; ?></h4></div>
+<div class="row">
+<div class="col s12 l12 m12">
+      <div class="card paddin-largo">
+  <div class="row"><h4 class="center-align">Documento <?php echo " #".$row[0]; ?></h4></div>
     <div class="row encabezado">
-      <div class="col s9 m3 l3">
+      <div class="col s9 m3 l4">
         <h5 class="center-align ">Fecha:<?php echo " ".$row[1]; ?></h5>
       </div>
-      <div class="col s3 m3 l3 o offset-m6 offset-l6">
+      <div class="col s3 m3 l3 o offset-m6 offset-l5">
         <h5 class="center-align"><?php echo $nombreruta; ?></h5>
       </div>
     </div><!-- encabezado-->
 
     <div class="row">
       <div class="col s8 m8 l8 offset-s2 offset-m2 offset-l2 ">
-     
-            <table >
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-              <tbody>
-                <tr>
-                  <td>Subtotal de Ventas</td>
-                  <td><?php echo $row[7]; ?></td>
-                </tr>
-                 <tr>
-                  <td>Total de Gastos</td>
-                  <td><?php echo $row[4]; ?></td>
-                </tr>
-                <tr>
-                  <td>Notas a Credito</td>
-                  <td><?php echo $row[5]; ?></td>
-                </tr>
-                                <tr>
-                  <td><p class="totales">Gran Total</p></td>
-                  <td><p class="totales"><?php echo "$".$row[3]; ?></p></td>
-                </tr>
-              </tbody>
-            </table>
+        <ul class="collection with-header collapsible" data-collapsible="expandable">
+          
+          <li class="collection-item">
+              <span class="">Subtotal Ventas</span>
+              <span class="espacio-der" ><?php echo $row[7]; ?></span>
+          </li>
+          <li class="collection-item"><span>Total de Gastos</span><span style="margin-left:15.3em;" ><?php echo $row[4]; ?></span> </li>
+          <li class="collection-item"><span>Notas a Credito</span><span style="margin-left:15.5em;"><?php echo $row[5]; ?></span> </li>
+          <li class="collection-header"><span class="totales">Gran Total</span><span class="totales" style="margin-left:6.8em;" ><?php echo "$".$row[3]; ?></span></li>
+        </ul>
 
       </div>
     </div>
     </div>
+</div>
+
+</div>
   </div>
 
   <!--  Scripts-->

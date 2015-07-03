@@ -23,5 +23,9 @@ switch($archivo_actual) //Valido en que archivo estoy para generar mi CSS de sel
 		<li><a href="../logout.php">Cerrar Sesion <i class="mdi-action-exit-to-app small left"></i></a></li>
 
 		</ul>
+		 <ul class="side-nav" id="mobile-demo">
+			<li <?php echo $b; ?> ><a href="home.php">Inicio <i class="mdi-action-settings small left"></i></a></li>
+		<li><a href="../logout.php">Cerrar Sesion <i class="mdi-action-exit-to-app small left"></i></a></li>
+		</ul>
 	</div>
 </nav>

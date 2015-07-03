@@ -12,7 +12,13 @@
 <body class="gray-blue">
 <?php include 'navegacion.php'; ?>
 <?php 
-  $id_user=$_GET['id_user']; 
+$id_user="";
+ if (isset($_GET['id_user'])) {
+   $id_user=$_GET['id_user']; 
+ }else{
+  $id_user=$_POST['id_user'];
+ }
+
   include("php/conexion.php");
   $link=Conectarse();
   $rutas=mysql_query("SELECT * FROM rutas");
@@ -67,10 +73,15 @@
     if (isset($_POST['ruta'])) {
     $ruta=trim($_POST['ruta']); 
     $user=trim($_POST['id_user']);
+    $asignaRuta=mysql_query("UPDATE usuarios SET id_ruta='$ruta' WHERE id_user='$user'  ");
 
+    echo '  <script>
+    href.location="user.php";
+  </script>';
     }
    ?>
   <!--  Scripts-->
+
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>

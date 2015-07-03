@@ -8,7 +8,9 @@
 .azul-claro{
   background-color: #03a9f4 !important;
 }
-
+.espacio-der{
+  margin-left: 15em !important;
+}
 ul.azul li{
   transition:all .3s ;
 }
@@ -63,7 +65,7 @@ color: #03a9f4;
 }
 .encabezado{
   padding: .2em;
-  border: 1px solid #03a9f4 !important;
+  border: 1px dashed #444 !important;
   background-color: #fff !important;
   border-radius: 3px;
 }
@@ -80,6 +82,7 @@ color: #03a9f4;
   box-shadow: 0px 0px 6px #03a9f4;
   
 }
+
 .botnret{
   padding: .3em;
  border: 1px solid #ff6d00 !important;
@@ -224,4 +227,12 @@ color: #03a9f4;
 .totales{
   font-size: 2em;
 color: #33691e  !important;
+}
+.sobre{
+  transition:all .3s ease;
+}
+.sobre:hover{
+  -webkit-box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
+  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22); 
 }

@@ -79,9 +79,9 @@ $ruta="";
 					        <tbody>
 								<?php 
 
-								$reg=mysql_query("SELECT * FROM cargas WHERE ir_ruta='$ruta'ORDER BY id_producto ASC ");
+								$reg=mysql_query("SELECT * FROM movimientos WHERE id_ruta='$ruta' AND tipo=0 ORDER BY id_producto ASC ");
 								while ($rs = mysql_fetch_row($reg)){
-									$ids=trim($rs[2]);
+									$ids=trim($rs[1]);
 									$name=mysql_query("SELECT * FROM productos WHERE id_producto='$ids' ",$link);
 									if ($rows = mysql_fetch_row($name)) {
 										$nombreprodcuto = trim($rows[2]);
@@ -119,10 +119,10 @@ $ruta="";
 
 					        <tbody>
 								<?php 
-								$consulta="SELECT * FROM devoluciones WHERE id_ruta='$ruta' ORDER BY id_producto ASC";
+								$consulta="SELECT * FROM movimientos WHERE id_ruta='$ruta' AND tipo =1 ORDER BY id_producto ASC";
 								$res=mysql_query($consulta);
 								while ($rowa=mysql_fetch_row($res)) {
-										$id=trim($rowa[2]);
+										$id=trim($rowa[1]);
 										
 									$name=mysql_query("SELECT * FROM productos WHERE id_producto='$id' ",$link);
 									if ($rows = mysql_fetch_row($name)) {
@@ -130,9 +130,9 @@ $ruta="";
 										}
 									echo '<tr>
 									<td>'.$nombreprodcuto.'</td>
-									<td>'.$rowa[3].'</td>
+									<td>'.$rowa[4].'</td>
 									</tr>';
-									$productosback[$pj]=$rowa[3];
+									$productosback[$pj]=$rowa[4];
 									$pj++;
 
 								}
@@ -202,6 +202,12 @@ $ruta="";
 					echo '
 					<input type="hidden" name="ruta" value="'.$ruta.'">
 					<input type="hidden" name="subtotal" value="'.$subtotal.'">
+					<div class="row">
+						<div class="input-field col s3 m2 l2 offset-l10 offset-s9 offset-lm0">
+							<label for="fal">Faltante</label>
+							<input id="fal" type="text"name="faltante" placeholder="$0.0">
+						</div>
+					</div>					
 					';
 
 				 ?>
@@ -213,6 +219,8 @@ $ruta="";
 		</div><!-- div que contendra elformulario que afectara la carga -->
 	</div>
 </div>
+
+
 <?php 
 /*
 echo '<pre>';

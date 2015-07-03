@@ -17,104 +17,124 @@
 <div class="row">
   <div class="col s12 m12 l12">
         <div class="card paddin-largo">
-      <div class="row">
-  
-        
-    
-      <div class="col s6 m9 l9 offset-s1">
-        <div class="row">
-       
-            <h3 class="center-align">Lista de Cargas</h3>
-
-        </div>
-      </div>
-      <div class="col s4 m2 l2">
-        <a href="#new" class="botnnva modal-trigger medium-letter" ><span>Nueva Carga</span></a>
-      </div>
-    </div>
+            <h3 class="center-align">Carga</h3>
+   
     <div class="row">
+        <form action="cargas.php" method="post">
+          <div class="row">
+            <div class="input-field col s2 m2 l2 offset-s3 offset-m3 offset-l3">
+              <label for="ia">Selecione una Fecha</label>
+               <input type="date" class="datepicker" name="fecha">
+            </div>
+            <div class="input-field col s3 m3 l3">
+             <select name="ruta" class="browser-default">
+              
             <?php 
-      
-        include("php/conexion.php");
-        $link=Conectarse();
-        $constula=mysql_query("SELECT * FROM rutas ",$link);
-        echo '<table class="col s12 m12 l12" >
-              <thead>
-                <tr>
-                    <th data-field="id">Nombre</th>
-                    <th data-field="name">Codigo</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-              </thead>
-              <tbody>';
-        while ($row = mysql_fetch_row($constula)){
-          echo '<tr>
-            <td>'.$row[2].'</td>
-            <td>'.$row[1].'</td>
-            <td></td>
-            <td><a class="botncar" href="verCarga.php?id_ruta='.$row[0].'"'.'>Ver Carga</a></td>
-            <td><a class="botnret" href="revisarCargas.php?id_ruta='.$row[0].'"'.'>Llegada</a></td>
-            <td><a class="botnnva" href="revisar.php?idruta='.$row[0].'"'.'>Revisar</a></td>
-          </tr>';
-        }
-        echo '</tbody>
-      </table>';
-       ?>
-    </div>
-
-            
-    </div>
-  </div>
-</div>
-  </div>
-
-  <div id="new" class="modal">
-    <div class="modal-content">
-      <h4 class="center-align">Seleccionar Ruta</h4>
-      <div class="row">              
-            <?php 
-
+            $ruta="";
+   include("php/conexion.php");
             $linkS=Conectarse();
             $queryConsulta="SELECT * FROM rutas order by id_ruta asc";
-            $result = mysql_query($queryConsulta,$linkS);
-            $totalderutas=mysql_num_rows($result);
-            $n=$totalderutas/3;
-            $c=round($n);
-
-            for ($p=0; $p <$c ; $p++) { 
-              echo '<div class="row">';
-                for ($o=0; $o <=2 ; $o++) { 
-                  $campo=mysql_fetch_array($result);
-                      
-                      if ($p==$c) {
-                        
-                      }else{
-                      echo '<div class="col s4 m4 l4">';
-                      echo '
-                      <form action="nuevaCarga.php" class="center" method="get ">
-                        <input type="hidden" name="categoria" value="'.$campo['id_ruta'].'">
-
-                        <input type="submit" class="btn light-blue darken-4" value="'.$campo['nom_ruta'].'">
-                      </form>
-                      </div>
-                      
-                      ';
-                      }
-                      
-                    
-                }
-              echo "</div>";
-              echo '<div class="row"></div>';
+            $result = mysql_query($queryConsulta);
+            while($campo=mysql_fetch_array($result)){
+              echo "<option value='".$campo['id_ruta']."'> ".$campo['nom_ruta']." </option>";
             }
-            
              ?>
+            </select>
+            </div>
+            <div class="input-field col s2 m2 l2">
+              <input type="submit" class="btn-large " style="margin-top:-.2em;" value="Consultar">
+            </div>
+          </div>
+        </form>
+  
+    </div><!--Formulario-->
+
+    <div class="row">
+      <?php 
+      $nombreprodcuto="";
+        if (isset($_POST['ruta'])) {
+          $ruta=trim($_POST['ruta']);
+          $fecha=date("Y-m-d", strtotime($_POST['fecha']));
+
+        }
+
+      ?>
+  <div class="col s6 m6 l6">
+    <table>
+                 <thead>
+                    <tr>
+                        <th data-field="id">nombre</th>
+                        <th data-field="name">se llevo</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                <?php 
+                $link=Conectarse();
+                $reg=mysql_query("SELECT * FROM movimientos WHERE id_ruta='$ruta' AND tipo=0 ORDER BY id_producto ASC ",$link);
+                while ($rs = mysql_fetch_row($reg)){
+                  $ids=trim($rs[1]);
+                  $name=mysql_query("SELECT * FROM productos WHERE id_producto='$ids' ",$link);
+                  if ($rows = mysql_fetch_row($name)) {
+                    $nombreprodcuto = trim($rows[2]);
+                    }
+                    
+                  
+                echo '<tr>
+                    <td>'.$nombreprodcuto.'</td>
+                    <td>'.$rs[3].'</td>
+                  </tr>';
+
+                }
+                
+                 ?>
+                  </tbody>
+            </table>
+  </div>
+<div class="col s6 m6 l6">
+  <table>
+                 <thead>
+                    <tr>
+                        <th data-field="id">nombre</th>
+                        <th data-field="name">regreso</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                <?php 
+                $consulta="SELECT * FROM movimientos WHERE id_ruta='$ruta' AND tipo =1 ORDER BY id_producto ASC";
+                $res=mysql_query($consulta);
+                while ($rowa=mysql_fetch_row($res)) {
+                    $id=trim($rowa[1]);
+                    
+                  $name=mysql_query("SELECT * FROM productos WHERE id_producto='$id' ",$link);
+                  if ($rows = mysql_fetch_row($name)) {
+                    $nombreprodcuto = trim($rows[2]);
+                    }
+                  echo '<tr>
+                  <td>'.$nombreprodcuto.'</td>
+                  <td>'.$rowa[4].'</td>
+                  </tr>';
             
-      </div>
+
+                }
+        
+
+                 ?>
+                  </tbody>
+            </table>
+</div>
+
+    </div>
+
+
+            
     </div>
   </div>
+  </div>
+  </div>
+
+  
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>

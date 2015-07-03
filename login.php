@@ -13,6 +13,7 @@
 		$_SESSION['u_user']=$user;
 		$_SESSION['u_id']=$resultado[0];
 		$_SESSION['u_tipo']=$resultado[3];
+		$_SESSION['ruta']=$resultado[4];
 		if($_SESSION['u_tipo']==1){
 			header("Location: dashboard.php");
 		echo "sesion iniciada";

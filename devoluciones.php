@@ -1,6 +1,7 @@
 <?php 
 $idruta=$_POST['idruta'];
 $fecha=date("Y-m-d", strtotime($_POST['fecha']));
+$id_dcto=$_POST['id_dcto'];
 include("php/conexion.php");
 $link=Conectarse();
 $ID_productos[0]="";
@@ -22,7 +23,7 @@ $ID_productos[0]="";
 
 	$acumulador=0;  #Variable que sirve para ir acumulandp los producot de un mismo tipo
 	for ($i=0; $i <$total ; $i++) { 
-		$result=mysql_query("SELECT * FROM movimientos WHERE id_producto='$ID_productos[$i]' AND id_ruta='$idruta' AND tipo=1 ");
+		$result=mysql_query("SELECT * FROM movimientos WHERE id_producto='$ID_productos[$i]' AND id_ruta='$idruta' AND tipo=1 AND id_dcto='$id_dcto'  ");
 		if ($w=mysql_num_rows($result)>0) {
 			while ($row=mysql_fetch_row($result)) {
 			$acumulador+=$row[4];
