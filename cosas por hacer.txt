@@ -1,0 +1,20 @@
+- faltante no es un gasto  **
+agregar los gastos a la pantalle de revisar **
+_____________SOBRE EL FALTANTE____________
+
+al final de cada semana se acumulan todos 
+los faltantes para descontarlos del sueldo
+
+___________________________________________
+
+
+- generar reportes de para las rutas *
+___________DETALLES DEL REPORTE________________
+_____ Formulario para traer segun la ruta _____
+_____ todos los movimientos 
+_____
+_____
+_____
+_____
+________________________________________________
+- cambiar los gastos a la seccion de administracion *

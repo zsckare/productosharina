@@ -33,11 +33,16 @@
 		$pod=mysql_num_rows($query);
 	$n=$pod/4;
 	$ci=round($n);
+	$nomrut=mysql_query("SELECT nom_ruta FROM rutas WHERE id_ruta='$idruta' ");
+	$nr=mysql_fetch_row($nomrut);
+	$nombre_ruta=$nr[0];
 ?>
 <div class="container">
 	<div class="card paddin-largo">
 	<div class="row">
-		<h4 class="center-align">Productos Que regresaron</h4>
+		<h4 class="center-align">Productos Que regresaron en <?php echo $nombre_ruta; ?></h4>
+		<?php echo '<a href="editarUltimoRegreso.php?idruta='.$idruta.'">Editar</a>'; ?>
+		
 	</div>
 		<form action="addDevolucion.php" method="post">
 			<?php 

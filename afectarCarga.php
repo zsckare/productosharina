@@ -10,11 +10,11 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body class="gray-blue">
-<?php include 'navegacion.php'; ?>
-<div class="backline be-blue"></div>
+  <?php include 'navegacion.php'; ?>
+  <div class="backline be-blue"></div>
 
-<?php 
-date_default_timezone_set("America/Mexico_City");
+  <?php 
+  date_default_timezone_set("America/Mexico_City");
   # en este archivo afectar la carga de la ruta asignada
   # ademas se afectara el documento asignado modificando el total de venta
   # de diho documento
@@ -37,18 +37,23 @@ date_default_timezone_set("America/Mexico_City");
   #aqui agregare el dinero que le falte al vendedor a la tabla de extras
   $faltante=$_POST['faltante'];
   $faltantedecimales=$faltante.".0";
-  $fal=mysql_query("UPDATE extras SET `faltante` = '$faltantedecimales' WHERE `id_dcto` = '$id_dcto' ");
+  $gasolina=trim($_POST['gasolina']);
+  $viaticos=trim($_POST['viaticos']);
+  $lavado=trim($_POST['lavado']);
+  $promociones=trim($_POST['promocion']);
+  $otros=trim($_POST['otros']);
+  $fal=mysql_query("UPDATE extras SET `faltante` = '$faltantedecimales',promocion ='$promociones', gasolina='$gasolina', viaticos='$viaticos', lavado='$lavado', gastosvarios='$otros' WHERE `id_dcto` = '$id_dcto' ");
 
-?>
-    <div class="container">
-      <div class="card">
-    <?php 
-    $carga[0]="";
-    $devolucion[0]="";
-    $totproductos[0]="";
-    $id_producto[0]="";
-    $i=0;
-    $j=0;
+  ?>
+  <div class="container">
+    <div class="card">
+      <?php 
+      $carga[0]="";
+      $devolucion[0]="";
+      $totproductos[0]="";
+      $id_producto[0]="";
+      $i=0;
+      $j=0;
 
       $reg=mysql_query("SELECT * FROM cargas WHERE ir_ruta='$ruta' ORDER BY id_producto ASC ");
       while ($row=mysql_fetch_row($reg)) {
@@ -78,70 +83,69 @@ date_default_timezone_set("America/Mexico_City");
 
 #echo "-----------------------------------------";
 
-    $max=sizeof($carga);
-    $restante[0]="";
-    for ($k=0; $k <$max ; $k++) { 
-      if($devolucion[$k]==0){
-        $restante[$k]=0;
-      }else{
-      $restante[$k]=$devolucion[$k];
-    }
-      
-    }
+      $max=sizeof($carga);
+      $restante[0]="";
+      for ($k=0; $k <$max ; $k++) { 
+        if($devolucion[$k]==0){
+          $restante[$k]=0;
+        }else{
+          $restante[$k]=$devolucion[$k];
+        }
+        
+      }
 
   #echo '<pre>';
   #print_r($restante);
   #echo '</pre>';
     #en el for voy actulizadno uno por uno la existencia restanteen la carga
-    for ($l=0; $l <$max ; $l++) { 
-     
-     $actualizar="UPDATE cargas SET existencia = $restante[$l] WHERE ir_ruta = '$ruta' AND id_producto ='$id_producto[$l]' ";
-     mysql_query($actualizar)or die(mysql_error());
+      for ($l=0; $l <$max ; $l++) { 
+       
+       $actualizar="UPDATE cargas SET existencia = $restante[$l] WHERE ir_ruta = '$ruta' AND id_producto ='$id_producto[$l]' ";
+       mysql_query($actualizar)or die(mysql_error());
 #echo '<script type="text/javascript">console.log("actualizadp :)");</script>';
-    }
+     }
     #AQUI acumulare los gastos que haya tenido el vendedor 
-    $gastos="";
-    $gstos=mysql_query("SELECT * FROM extras WHERE id_dcto='$id_dcto'");
-    $r=mysql_fetch_row($gstos);
-    $promo=$r[2]; 
-    $gasolina=$r[3];
-    $viaticos=$r[4];
-    $lavado=$r[5];
-    $otros=$r[6];
-    $falt=$r[7];
-    $gastos=$promo+$gasolina+$viaticos+$lavado+$otros+$falt;
-    echo($gastos);
-    $actulizargastos=mysql_query("UPDATE`documentos` SET `totgastos` = '$gastos' WHERE `documentos`.`id_dcto` ='$id_dcto' ");
+     $gastos="";
+     $gstos=mysql_query("SELECT * FROM extras WHERE id_dcto='$id_dcto'");
+     $r=mysql_fetch_row($gstos);
+     $promo=$r[2]; 
+     $gasolina=$r[3];
+     $viaticos=$r[4];
+     $lavado=$r[5];
+     $otros=$r[6];
+     $gastos=$promo+$gasolina+$viaticos+$lavado+$otros;
+     echo($gastos);
+     $actulizargastos=mysql_query("UPDATE`documentos` SET `totgastos` = '$gastos' WHERE `documentos`.`id_dcto` ='$id_dcto' ");
 
   #$actualizar="UPDATE cargas SET existencia = $restante WHERE id_ruta = '$ruta' id_producto ='$id_producto'";
-    $actdcto=mysql_query("SELECT * FROM documentos WHERE id_dcto = '$id_dcto' ");
-    $totgastos="";
-    $totnotas="";
-    $grantotal=0;
-    $fila=mysql_fetch_row($actdcto);
-    $totnotas=$fila[5];
-    $totgastos=$fila[4];
-    $gastosnega=$totgastos+$totnotas;
-    $algo=$sub-$gastosnega;
-    $grantotal=$algo;
+     $actdcto=mysql_query("SELECT * FROM documentos WHERE id_dcto = '$id_dcto' ");
+     $totgastos="";
+     $totnotas="";
+     $grantotal=0;
+     $fila=mysql_fetch_row($actdcto);
+     $totnotas=$fila[5];
+     $totgastos=$fila[4];
+     $gastosnega=$totgastos+$totnotas;
+     $algo=$sub-$gastosnega;
+     $grantotal=$algo;
 
-    $updatedcto=mysql_query("UPDATE documentos SET totventa=$grantotal, subtotal = $sub WHERE id_dcto = '$id_dcto' AND fecha = '$hoy' " );
+     $updatedcto=mysql_query("UPDATE documentos SET totventa=$grantotal, subtotal = $sub WHERE id_dcto = '$id_dcto' AND fecha = '$hoy' " );
 
     //--------------------Vaciar tabla de devoluciones-----------
-    $del=mysql_query("DELETE FROM devoluciones WHERE id_ruta='$ruta' ");
-    header("Location: dashboard.php");
+     $del=mysql_query("DELETE FROM devoluciones WHERE id_ruta='$ruta' ");
+     header("Location: dashboard.php");
 
      ?>
 
-    </div>
+   </div>
 
-    </div>
+ </div>
 
 
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+ <!--  Scripts-->
+ <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+ <script src="js/materialize.js"></script>
+ <script src="js/init.js"></script>
 
-  </body>
+</body>
 </html>

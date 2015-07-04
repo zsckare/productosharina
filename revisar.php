@@ -205,23 +205,52 @@ $ruta="";$id_dcto="";
 		</div><!-- div donde muestro el subtotal -->
 		<div class="row">
 			<form action="afectarCarga.php" method="POST">
-				<?php 
-					echo '
-					<input type="hidden" name="ruta" value="'.$ruta.'">
-					<input type="hidden" name="id_dcto" value="'.$id_dcto.'">
-					<input type="hidden" name="subtotal" value="'.$subtotal.'">
-					<div class="row">
-						<div class="input-field col s3 m2 l2 offset-l10 offset-s9 offset-lm0">
-							<label for="fal">Faltante</label>
-							<input id="fal" type="text"name="faltante" placeholder="$0.0">
-						</div>
-					</div>					
-					';
+			<div class="row"><h5 class="center-align">Gastos</h5></div>
+				<div class="row">
+					<div class="input-field col s12 m8 l5 offset-m2 offset-l1">
+						<label for="gas">Gasolina</label>
+						<input id="gas" type="text" name="gasolina" >
+					</div>
 
-				 ?>
-				 <div class="center">
-				 	<input type="submit" value="Guardar" class="boton-largo botnnva" >
-				 </div>
+					<div class="input-field col s12 m8 l5 offset-m2 ">
+						<label for="via">Viaticos</label>
+						<input id="via" type="text" name="viaticos" >
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12 m8 l5 offset-m2 offset-l1">
+						<label for="lav">Lavado</label>
+						<input id="lav" type="text" name="lavado" >
+					</div>
+
+					<div class="input-field col s12 m8 l5 offset-m2 ">
+						<label for="lav">Promocion</label>
+						<input id="lav" type="text" name="promocion" >
+					</div>
+				</div>					
+				<div class="row">
+					<div class="input-field col s12 m8 l5 offset-m2 offset-l1">
+						<label for="lav">Otros Gastos</label>
+						<input id="lav" type="text" name="otros" >
+					</div>
+					<div class="input-field col s12 m8 l5 offset-m2 ">
+						<label for="fal">Faltante</label>
+						<input id="fal" type="text"name="faltante" placeholder="$0.0">
+					</div>
+				</div>
+
+				<?php 
+				echo '
+				<input type="hidden" name="ruta" value="'.$ruta.'">
+				<input type="hidden" name="id_dcto" value="'.$id_dcto.'">
+				<input type="hidden" name="subtotal" value="'.$subtotal.'">
+
+				';
+
+				?>
+				<div class="center">
+					<input type="submit" value="Guardar" class="boton-largo botnnva" >
+				</div>
 				
 			</form> 
 		</div><!-- div que contendra elformulario que afectara la carga -->

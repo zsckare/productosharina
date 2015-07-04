@@ -27,6 +27,7 @@
                     
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
               </thead>
               <tbody>';
@@ -36,7 +37,7 @@
 
             <td><a class="botncar" href="addProductos2.php?idruta='.$row[0].'"'.'>Nueva Carga</a></td>
             <td><a class="botnret" href="addReturn.php?idruta='.$row[0].'"'.'>Regreso</a></td>
-            
+            <td><a class="botnret" href="revisar.php?idruta='.$row[0].'"'.'>Revisar</a></td>
           </tr>';
         }
         echo '</tbody>

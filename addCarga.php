@@ -9,7 +9,7 @@ $idruta=trim($_POST['idruta']);
 		$id_dcto=mysql_insert_id();
 	}
 	//-----------crear nuevo extra para el documento creado---
-		$extra=mysql_query("INSERT INTO extras (id_exttra, id_dcto) VALUES (NULL, $id_dcto) ");
+		$extra=mysql_query("INSERT INTO extras (id_exttra, id_dcto, fecha, id_ruta) VALUES (NULL, $id_dcto, $fecha , $idruta ) ");
 	//--------------------------------------------------------
 	$traerProductos="SELECT * FROM productos ORDER BY id_producto";
 	$query=mysql_query($traerProductos);
