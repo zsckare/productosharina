@@ -133,7 +133,8 @@
 
     //--------------------Vaciar tabla de devoluciones-----------
      $del=mysql_query("DELETE FROM devoluciones WHERE id_ruta='$ruta' ");
-     header("Location: dashboard.php");
+     header("Location: verDcto.php?id_dcto=".$id_dcto);
+     #header("Location: dashboard.php");
 
      ?>
 

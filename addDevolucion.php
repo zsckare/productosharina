@@ -9,6 +9,10 @@ $rutaa=$idruta;
 	if ($row = mysql_fetch_row($rs)) {
 		$id_dcto = trim($row[0]);
 	}
+
+	$ocultarform=mysql_query("UPDATE `documentos` SET `verform` = '1' WHERE `id_dcto` = $id_dcto; ");
+
+
 	$traerProductos="SELECT * FROM productos ORDER BY id_producto";
 	$query=mysql_query($traerProductos);
 	$max=mysql_num_rows($query);

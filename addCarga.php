@@ -43,5 +43,5 @@ $idruta=trim($_POST['idruta']);
 			}else{}
 		}
 */
-		header("Location: rutas.php");
+		header("Location: dashboard.php");
  ?>

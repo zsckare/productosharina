@@ -14,7 +14,10 @@
 <div class="backline be-blue"></div>
   <div class="container">
     <div class="card paddin-largo">
-      <h3 class="center-align">Lista de Rutas</h3>
+            <div class="row">
+        <h3 class="col m8 center-align offset-m2">Lista de Rutas</h3>
+        <a href="nuevoRuta.php" class="col m2"><i class="medium mdi-content-add-circle"></i></a>
+      </div>
       <?php 
         include("php/conexion.php");
         $link=Conectarse();
@@ -35,9 +38,8 @@
           echo '<tr>
             <td>'.$row[2].'</td>
 
-            <td><a class="botncar" href="addProductos2.php?idruta='.$row[0].'"'.'>Nueva Carga</a></td>
-            <td><a class="botnret" href="addReturn.php?idruta='.$row[0].'"'.'>Regreso</a></td>
-            <td><a class="botnret" href="revisar.php?idruta='.$row[0].'"'.'>Revisar</a></td>
+            <td><a class="botncar" href="nuevaHoja.php?idruta='.$row[0].'"'.'>Nueva Carga</a></td>
+
           </tr>';
         }
         echo '</tbody>

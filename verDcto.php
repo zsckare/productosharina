@@ -172,7 +172,7 @@ $row=mysql_fetch_row($result);
         <div class="collapsible-body"></div>
       </li>
       <li>
-        <div class="collapsible-header">
+        <div class="collapsible-header" id="totalfinal">
           <span class="totales">Gran Total</span><span class="totales" style="margin-left:18em;" ><?php echo "$".$row[3]; ?></span>
         </div>
       </li>

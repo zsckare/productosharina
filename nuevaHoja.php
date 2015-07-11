@@ -46,7 +46,7 @@
 	</div>
 			<form action="addCarga.php" method="post" name="agregarProductos" class="row">
 				<div class="row">
-					<div class="col s4	 m4	 l4	 offset-s1 offset-m1 offset-l1">
+					<div class="col s12 m12	l4	offset-l1">
 						<?php 
 							for ($i=0; $i <$ci ; $i++) { 
 								echo '<div class="row">';
@@ -68,7 +68,7 @@
 
 						?>
 					</div>
-					<div class="col s4 m4 l4 offset-s2	 offset-m2	 offset-l2	">
+					<div class="col s12 m12 l4 offset-l2	">
 						<?php 
 						$otraconsulta=mysql_query("SELECT * FROM productos ORDER BY id_producto");
 							for ($l=0; $l <$ci ; $l++) { 
