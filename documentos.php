@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>Docmentos</title>
+  <title>Hojas de Carga</title>
 
   <!-- CSS  -->
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -18,7 +18,7 @@
     <div class="card paddin-largo" >
 
     <div class="row">
-            <h3 class="center-align">Lista de Documentos</h3>
+            <h3 class="center-align">Lista de Hojas de Carga</h3>
     </div>
     <div class="row">
         <form action="documentos.php" method="post">
@@ -29,7 +29,7 @@
             </div>
 
             <div class="input-field col s2 m2 l2">
-              <input type="submit" class="btn-large " style="margin-top:-.2em;" value="Ver Documentos">
+              <input type="submit" class="btn-large " style="margin-top:-.2em;" value="Ver Hojas de Carga">
             </div>
           </div>
         </form>

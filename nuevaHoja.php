@@ -8,7 +8,7 @@
     }
   ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -65,34 +65,18 @@
 								echo '</div>';
 							}
 					
-
-						?>
-					</div>
-					<div class="col s12 m12 l4 offset-l2	">
-						<?php 
-						$otraconsulta=mysql_query("SELECT * FROM productos ORDER BY id_producto");
-							for ($l=0; $l <$ci ; $l++) { 
-								echo '<div class="row">';
-								for ($p=0; $p <4 ; $p++) { 
-									while ($rows=mysql_fetch_row($otraconsulta)) {
-										echo '									
-											<div class="input-field col s3 m3 l3 ">
-												<label for="'.$rows[0].'">'.$rows[2].'</label>
-												<input id="'.$rows[0].'" type="number" name="r'.$rows[0].'" value="0" >
-											</div>
-										
-										';
-									}
-								}
-								echo '</div>';
-							}
 							echo '<input type="hidden" value="'.$idruta.'" name="idruta" >';
 							echo '<input type="hidden" value="'.$fecha.'" name="fecha" >';
 						?>
 					</div>
+
 				</div>
 
-			<input type="submit" class="btn light-blue darken-4 " >
+				<div class="row">
+					<div class="center-align">
+						<input type="submit" class="btn light-blue darken-4 " >
+					</div>
+				</div>
 		</form>
 	</div>
 	

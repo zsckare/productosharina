@@ -8,7 +8,7 @@
     }
   ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -33,20 +33,21 @@
           </div>
           <div class="row">
             <div class="col s12 m12 l12">
-              <h4 class="center-align" >Rutas</h4>
+              <h4 class="center-align" >Cargas</h4>
             </div>
           </div>
       </a><!--  Rutas-->
 
-      <a id="productos" href="productos.php" class="pnl card col m4 s12 l4 offset-m1 offset-l2 be-blue-letras">
+      <a id="productos" href="hojas.php" class="pnl card col m4 s12 l4 offset-m1 offset-l2 be-blue-letras">
           <div class="row ">
             <div class="col m12 s12 l12 center-align ">
-              <i class="medium  mdi-action-shopping-basket"></i>
+              <i class="  medium ion-document "></i>
+              
             </div>
           </div>
           <div class="row">
             <div class="col s12 m12 l12">
-              <h4 class="center-align" >Productos</h4>
+              <h4 class="center-align" >Descargas</h4>
             </div>
           </div>
       </a><!--  Productoss-->
@@ -62,20 +63,20 @@
           </div>
           <div class="row">
             <div class="col s12 m12 l12">
-              <h4 class="center-align" >Documentos</h4>
+              <h4 class="center-align" >Hojas de Carga</h4>
             </div>
           </div>
       </a><!--  Reportes-->
 
-      <a href="hojas.php" class="pnl card col m4 s12 l4 offset-m1 offset-l2 be-blue-letras">
-                  <div class="row up-space">
+      <a href="productos.php" class="pnl card col m4 s12 l4 offset-m1 offset-l2 be-blue-letras">
+         <div class="row up-space">
             <div class="col m12 s12 l12 center-align">
-              <i class="  medium ion-document "></i>
+              <i class="medium  mdi-action-shopping-basket"></i>
             </div>
           </div>
           <div class="row">
             <div class="col s12 m12 l12">
-              <h4 class="center-align" >Hojas</h4>
+              <h4 class="center-align" >Productos</h4>
             </div>
           </div>
       </a><!--  Usuarios-->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -43,9 +43,9 @@
         $linkS=Conectarse();
         if(isset($_POST['fecha'])){
           $fecha=date("Y-m-d", strtotime($_POST['fecha']));
-          $constula=mysql_query("SELECT * FROM documentos WHERE visible=0 AND fecha='$fecha'  ORDER BY hora DESC ");
+          $constula=mysql_query("SELECT * FROM documentos WHERE verform=0 AND fecha='$fecha'  ORDER BY hora DESC ");
         }else{
-          $constula=mysql_query("SELECT * FROM documentos WHERE visible=0 ORDER BY hora DESC ");
+          $constula=mysql_query("SELECT * FROM documentos WHERE verform=0 ORDER BY hora DESC ");
         }
 
         

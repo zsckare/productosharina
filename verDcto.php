@@ -7,7 +7,7 @@ $result=mysql_query("SELECT * FROM documentos WHERE id_dcto='$id_dcto' ");
 $row=mysql_fetch_row($result);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
@@ -29,6 +29,16 @@ $row=mysql_fetch_row($result);
   if ($rowa = mysql_fetch_row($rs)) {
     $id_dcto = trim($rowa [0]);
   }
+  $precioproducto[0]="";
+  $ppp=0;
+  $productosgnral=mysql_query("SELECT * FROM productos ORDER BY id_producto");
+  while ($pp=mysql_fetch_row($productosgnral)) {
+    $precioproducto[$ppp]=$pp[4];
+    $ppp++;
+  }
+
+
+
   ?>
   <div class="backline be-blue"></div>
   <div class="container">

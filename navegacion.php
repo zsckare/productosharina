@@ -25,7 +25,7 @@ switch($archivo_actual) //Valido en que archivo estoy para generar mi CSS de sel
    $seccion = "Usuarios";
    break;
      case "documentos.php":
-   $seccion = "Documentos";
+   $seccion = "Hojas de Carga";
    break;   
 
    case "verDcto.php":
